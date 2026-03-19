@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>極簡數位時鐘</title>
+    <style>
+        /* 設定深色背景與字體 */
+        body {
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace; /* 類數位的字體 */
+            color: #ffffff;
+        }
+
+        .clock-container {
+            text-align: center;
+        }
+
+        /* 時鐘本體樣式 */
+        #clock {
+            font-size: 8rem;
+            font-weight: bold;
+            letter-spacing: 5px;
+            /* 加上一點點霓虹發光效果 */
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        /* 日期樣式 */
+        #date {
+            font-size: 1.5rem;
+            color: #888888;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="clock-container">
+        <div id="date">YYYY-MM-DD</div>
+        <div id="clock">00:00:00</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // 取得日期
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            
+            // 取得時間
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            // 顯示到網頁上
+            document.getElementById('date').textContent = `${year} / ${month} / ${day}`;
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // 每秒執行一次
+        setInterval(updateClock, 1000);
+        
+        // 頁面載入後立即執行一次，避免空白等待
+        updateClock();
+    </script>
+</body>
+</html>
